@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* 🎯 આખી વેબસાઇટ માટે Inter ફોન્ટ્સ કાયમ માટે લોક કરી દીધા */
+:root {
+  font-family: 'Inter', sans-serif;
+}
