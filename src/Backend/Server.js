@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 import connectDB from './Config/Db.js';
 
 //new route file import
-import AuthRoute from './routes/AuthRoute.js';
+import AuthRoute from './Routes/AuthRoute.js';
 
-import AdminRoute from './routes/AdminRoute.js';
+import AdminRoute from './Routes/AdminRoute.js';
 
 dotenv.config();
 
