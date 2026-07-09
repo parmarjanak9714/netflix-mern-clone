@@ -1,6 +1,6 @@
 import express from 'express';
 //add controller functions
-import { getAllUsers, adminAddUser, updateUser, deleteUser } from '../controllers/AdminController.js';
+import { getAllUsers, adminAddUser, updateUser, deleteUser } from '../Controllers/AdminController.js';
 
 const router = express.Router();
 
