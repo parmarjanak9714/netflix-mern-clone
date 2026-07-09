@@ -1,4 +1,4 @@
-import User from '../models/Users.js';
+import User from '../Models/Users.js';
 import bcrypt from 'bcryptjs';
 // ====================================================================
 //  GET ALL USERS (all users list fetch)
