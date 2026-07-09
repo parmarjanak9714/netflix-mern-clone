@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { registerUser, loginUser } from '../controllers/authController.js';
+import { registerUser, loginUser } from '../Controllers/AuthController.js';
 //mini router function to make samall route 
 const router = express.Router();
 
