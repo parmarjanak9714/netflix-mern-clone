@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // useState: પોપ-અપ ફોર્મની અંદર એડમિન જે નામ, ઇમેઇલ, ફોન, રોલ અને સ્ટેટસ લખશે તેને લાઈવ સેવ કરવા માટે.
 
-import API from '../../Api/axios';
+import API from '../../Api/Axios';
 // API: આપણા Node.js બેકએન્ડ સર્વરની લિંક (Port 5000) લાવ્યા જેથી નવો યુઝર ડેટાબેઝમાં સેવ થઈ શકે.
 
 const AddUserModal = ({ isOpen, onClose }) => {
