@@ -21,16 +21,7 @@ const DashBord = () => {
   // 🎯 માસ્ટર ટેબ સ્વિચ સ્વિચ
   const [activeTab, setActiveTab] = useState('dashboard'); 
 
-  // 🔐 સિક્યોરિટી અને લાઈવ ડેટા ખેંચવાનું મુખ્ય લોજિક
-  useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
-    
-    if (!loggedInUser || loggedInUser.role !== 'Admin') {
-      alert('Access Denied! Only Administrators can access this panel.');
-      navigate('/login'); 
-      return;
-    }
-
+  
     const fetchAdminData = async () => {
       try {
         const response = await API.get('/admin/users');
@@ -46,6 +37,41 @@ const DashBord = () => {
         console.error("Error fetching admin data:", error);
       }
     };
+
+    // 🔄 ટેબલ અપડેટ અને ડિલીટ ફંક્શન્સ
+const toggleStatus = async (id, currentStatus) => {
+  const newStatus = currentStatus === 'Active' ? 'Deactivated' : 'Active';
+  try {
+    await API.put(`/admin/user/update/${id}`, { status: newStatus });
+    alert('User status updated successfully!');
+    await fetchAdminData();
+  } catch (error) {
+    alert('Failed to update status: ' + error.message);
+  }
+};
+
+const handleDelete = async (id) => {
+  if (window.confirm('Are you absolutely sure you want to delete this user from the system?')) {
+    try {
+      await API.delete(`/admin/user/delete/${id}`);
+      alert('User deleted successfully!');
+      await fetchAdminData();
+    } catch (error) {
+      alert('Failed to delete user: ' + error.message);
+    }
+  }
+};
+
+  // 🔐 સિક્યોરિટી અને લાઈવ ડેટા ખેંચવાનું મુખ્ય લોજિક
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!loggedInUser || loggedInUser.role !== 'Admin') {
+      alert('Access Denied! Only Administrators can access this panel.');
+      navigate('/login'); 
+      return;
+    }
+
 
     fetchAdminData();
   }, [navigate]);
@@ -232,30 +258,6 @@ const DashBord = () => {
 </footer>
     </div>
   );
-};
-
-// 🔄 ટેબલ અપડેટ અને ડિલીટ ફંક્શન્સ
-const toggleStatus = async (id, currentStatus) => {
-  const newStatus = currentStatus === 'Active' ? 'Deactivated' : 'Active';
-  try {
-    await API.put(`/admin/user/update/${id}`, { status: newStatus });
-    alert('User status updated successfully!');
-    window.location.reload();
-  } catch (error) {
-    alert('Failed to update status: ' + error.message);
-  }
-};
-
-const handleDelete = async (id) => {
-  if (window.confirm('Are you absolutely sure you want to delete this user from the system?')) {
-    try {
-      await API.delete(`/admin/user/delete/${id}`);
-      alert('User deleted successfully!');
-      window.location.reload();
-    } catch (error) {
-      alert('Failed to delete user: ' + error.message);
-    }
-  }
 };
 
 export default DashBord;
